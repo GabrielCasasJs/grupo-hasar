@@ -3,6 +3,8 @@ import {
   useNavigate,
 } from 'react-router-dom';
 
+import { MdFavorite } from "react-icons/md";
+
 import { FcHome } from "react-icons/fc";
 
 import useGetDogDetails from '../../hooks/UseGetDogDetails';
@@ -37,9 +39,24 @@ function BreedsDetails() {
 
   return (
     <Screen className="h-dvh">
-      <button type="button" onClick={() => navigate('/home')}>
-        <FcHome size={40} />
-      </button>
+      <div className="flex items-center justify-between">
+        <button type="button" onClick={() => navigate('/home')}>
+          <FcHome size={40} />
+        </button>
+
+        <button
+          type="button"
+          onClick={() => navigate('/favorite-breends')}
+          className="flex items-center border rounded-lg p-2"
+        >
+          <p
+            className="pr-4 text-gray-100"
+          >
+            Favoritos
+          </p>
+          <MdFavorite color="#fff" size={34} />
+        </button>
+      </div>
       <Text
         customSize="30px"
         weight="bold"
