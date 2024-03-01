@@ -1,18 +1,29 @@
-/* eslint-disable react/prop-types */
-import { useState } from 'react';
+import {
+    useState,
+    useEffect,
+} from 'react';
 
 import { AuthProvider } from './AuthContext';
 
+import { getData } from '../helpers/storageData';
+
+const localKey = 'favorites';
+
 function AppProviderContext({ children }) {
-    const [users, setUsers] = useState([{
-        message: 'Felicidades por este nuevo proyecto!'
-    }])
+    const [favorites, setFavorites] = useState([]);
+
+    useEffect(() => {
+        const storedFavorites = getData(localKey);
+        if (storedFavorites) {
+          setFavorites(storedFavorites);
+        }
+      }, []);
 
     return (
         <AuthProvider
             value={{
-                users,
-                setUsers
+                favorites,
+                setFavorites
             }}
         >
             {children}

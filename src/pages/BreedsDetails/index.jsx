@@ -1,6 +1,12 @@
-import { useParams } from 'react-router-dom';
+import {
+  useParams,
+  useNavigate,
+} from 'react-router-dom';
 
-import UseGetDogDetails from "../../hooks/UseGetDogDetails";
+import { FcHome } from "react-icons/fc";
+
+import useGetDogDetails from '../../hooks/UseGetDogDetails';
+import useFavorites from '../../hooks/UseFavorites';
 
 import { capitalizeFirstLetter } from '../../helpers/capitalizeFirstLetter';
 
@@ -9,8 +15,17 @@ import Text from '../../components/Text';
 import SubBreedDetails from './components/SubBreedDetails';
 
 function BreedsDetails() {
+  const navigate = useNavigate();
+
   const { breed } = useParams();
-  const { details, loading, error } = UseGetDogDetails(breed);
+
+  const {
+    favorites,
+    addToFavorites,
+    removeFromFavorites,
+  } = useFavorites();
+
+  const { details, loading, error } = useGetDogDetails(breed);
 
   if (loading) {
     return <p>Cargando...</p>;
@@ -21,7 +36,10 @@ function BreedsDetails() {
   }
 
   return (
-    <Screen>
+    <Screen className="h-dvh">
+      <button type="button" onClick={() => navigate('/home')}>
+        <FcHome size={40} />
+      </button>
       <Text
         customSize="30px"
         weight="bold"
@@ -31,15 +49,36 @@ function BreedsDetails() {
       >
         {`Detalle de la Raza - ${capitalizeFirstLetter(breed)}`}
       </Text>
-      {details && (
-        <ul className="flex w-full flex-wrap mt-10">
+
+      <hr style={{ marginTop: 40 }} />
+
+      <Text
+        color="white"
+        weight="bold"
+        customSize={30}
+        styles={{ marginTop: 40 }}
+      >
+        {details.length > 0 ? 'SUB RAZAS' : 'NO HAY SUB RAZAS!'}
+      </Text>
+
+      {details.length > 0 ? (
+        <ul className="flex w-full flex-wrap mt-4 justify-between">
           {details && details?.length > 0 && details?.map((subBreedWithImages) => (
             <SubBreedDetails
-                key={subBreedWithImages.subBreed}
-                subBreedWithImages={subBreedWithImages}
+              key={subBreedWithImages.subBreed}
+              subBreedWithImages={subBreedWithImages}
+              onFavoriteClick={(subBreed) => {
+                if (favorites.includes(subBreed)) {
+                  removeFromFavorites(subBreed);
+                } else {
+                  addToFavorites(subBreed);
+                }
+              }}
             />
           ))}
         </ul>
+      ) : (
+        <Text> Sin sub raza </Text>
       )}
     </Screen>
   );

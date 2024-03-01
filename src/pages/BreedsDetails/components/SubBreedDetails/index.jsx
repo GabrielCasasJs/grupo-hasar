@@ -6,18 +6,17 @@ import Text from '../../../../components/Text';
 
 function SubBreedDetails({
     subBreedWithImages,
-    onFavoriteClick = () => {},
+    onFavoriteClick,
 }) {
+    const handleFavoriteClick = () => {
+        if (onFavoriteClick) {
+            onFavoriteClick(subBreedWithImages.subBreed);
+        }
+    };
+
     return (
-        <li
-            className="mr-6 my-6 relative"
-            key={subBreedWithImages?.subBreed}
-        >
-            <Text
-                color="white"
-                customSize={20}
-                styles={{ paddingBottom: 12 }}
-            >
+        <li className="mr-6 my-6 relative" key={subBreedWithImages?.subBreed}>
+            <Text color="white" customSize={20} styles={{ paddingBottom: 12 }}>
                 {capitalizeFirstLetter(subBreedWithImages.subBreed)}
             </Text>
             {subBreedWithImages.images && (
@@ -27,7 +26,7 @@ function SubBreedDetails({
                             <img
                                 src={image}
                                 alt={`${subBreedWithImages.subBreed}${image}`}
-                                className="w-72 h-72 object-cover rounded-md"
+                                className="w-64 h-64 object-cover rounded-md"
                             />
                         </li>
                     ))}
@@ -35,7 +34,7 @@ function SubBreedDetails({
             )}
             <button
                 type="button"
-                onClick={onFavoriteClick}
+                onClick={handleFavoriteClick}
                 className="absolute right-3 bottom-3"
             >
                 <MdFavorite color="#fff" size={34} />

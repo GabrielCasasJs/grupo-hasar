@@ -1,4 +1,4 @@
-const localKey = 'yoCriptoSome$$$';
+const localKey = 'grupoHasar$$$';
 
 export function storeData(value, key = localKey) {
   try {
