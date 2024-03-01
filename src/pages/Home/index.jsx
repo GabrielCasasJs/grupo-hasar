@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import UseGetGods from "../../hooks/UseGetDogs";
 import Screen from '../../components/Screen';
 import Card from "../../components/Card";
@@ -5,12 +7,18 @@ import Card from "../../components/Card";
 function Home() {
   const { dogs } = UseGetGods();
 
+  const navigate = useNavigate();
+
   if (!dogs || !dogs.message) {
     return <p>Cargando...</p>
   }
 
+  const handleClick = (breed) => {
+    navigate(`/sub-breeds/${breed}`);
+  };
+
   return (
-    <Screen>
+    <Screen safe>
       <h2 className="text-3xl ml-4 pb-8 underline text-white font-bold" style={{ fontFamily: 'sans-serif' }}>
         Razas de Perros
       </h2>
@@ -20,6 +28,7 @@ function Home() {
             <Card
               key={breed}
               breed={breed}
+              onClick={() => handleClick(breed)}
               breedCount={dogs.message[breed].length}
             />
           </li>

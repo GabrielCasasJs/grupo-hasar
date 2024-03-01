@@ -1,5 +1,5 @@
-// UseGetGods.js
 import { useState, useEffect } from 'react';
+
 import { getDogs } from '../apis/dogs';
 
 const UseGetGods = () => {
