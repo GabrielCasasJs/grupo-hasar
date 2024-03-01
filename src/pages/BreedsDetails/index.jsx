@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import {
   useParams,
   useNavigate,
@@ -5,6 +7,8 @@ import {
 
 import { MdFavorite } from "react-icons/md";
 import { FcHome } from "react-icons/fc";
+
+import ConfettiExplosion from 'react-confetti-explosion';
 
 import useGetDogDetails from '../../hooks/UseGetDogDetails';
 import useFavorites from '../../hooks/UseFavorites';
@@ -19,7 +23,13 @@ function BreedsDetails() {
   const navigate = useNavigate();
   const { breed } = useParams();
 
-  const { isFavorite, addToFavorites, removeFromFavorites } = useFavorites();
+  const [showConfetti, setShowConfetti] = useState(false);
+
+  const {
+    isFavorite,
+    addToFavorites,
+    removeFromFavorites,
+  } = useFavorites();
 
   const { details, loading, error } = useGetDogDetails(breed);
 
@@ -29,6 +39,14 @@ function BreedsDetails() {
 
   if (error) {
     return <p>Error al cargar los detalles.</p>;
+  }
+
+  const handleAddFavorite = (subBreedWithImages) => {
+    setShowConfetti(true);
+    addToFavorites(subBreedWithImages);
+    setTimeout(() => {
+      setShowConfetti(false);
+    }, 1000);
   }
 
   return (
@@ -45,6 +63,11 @@ function BreedsDetails() {
           <p className="pr-4 text-gray-100">Favoritos</p>
           <MdFavorite color="#fff" size={34} />
         </button>
+        {showConfetti ? (
+          <ConfettiExplosion
+            style={{ position: 'absolute', right: 20 }}
+          />
+        ) : null}
       </div>
       <Text
         customSize="30px"
@@ -72,7 +95,7 @@ function BreedsDetails() {
                 if (isFavorite(subBreedWithImages)) {
                   removeFromFavorites(subBreedWithImages);
                 } else {
-                  addToFavorites(subBreedWithImages);
+                  handleAddFavorite(subBreedWithImages)
                 }
               }}
             />
