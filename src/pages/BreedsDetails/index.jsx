@@ -78,7 +78,7 @@ function BreedsDetails() {
       </Text>
 
       {details.length > 0 ? (
-        <ul className="flex w-full flex-wrap mt-4 justify-between">
+        <ul className="flex w-full flex-wrap mt-4">
           {details && details?.length > 0 && details?.map((subBreedWithImages) => (
             <SubBreedDetails
               key={subBreedWithImages.subBreed}

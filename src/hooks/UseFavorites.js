@@ -17,7 +17,7 @@ function useFavorites() {
   };
 
   const removeFromFavorites = (subBreed) => {
-    const updatedFavorites = favorites.filter((fav) => fav.name !== subBreed.name);
+    const updatedFavorites = favorites.filter((fav) => fav.subBreed !== subBreed.subBreed);
     setFavorites(updatedFavorites);
     storeData(updatedFavorites, 'favorites');
   };
