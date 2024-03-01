@@ -17,3 +17,9 @@ Follow these steps to set up and run the project.
     Tailwind CSS: A utility-first CSS framework.
     Framer Motion: A production-ready motion library for React.
     React-icons
+
+3. **Link de la web en PROD**
+   ```
+   https://master--grupo-hasar.netlify.app/
+   ```
+    
