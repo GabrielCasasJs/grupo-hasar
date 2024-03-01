@@ -19,6 +19,8 @@ function AppProviderContext({ children }) {
         }
       }, []);
 
+    console.info('favorites :', favorites)
+
     return (
         <AuthProvider
             value={{

@@ -1,18 +1,13 @@
 import { MdFavorite } from "react-icons/md";
 
 import { capitalizeFirstLetter } from '../../../../helpers/capitalizeFirstLetter';
-
 import Text from '../../../../components/Text';
 
 function SubBreedDetails({
     subBreedWithImages,
-    onFavoriteClick,
+    handleFavoriteClick,
+    isFavorite,
 }) {
-    const handleFavoriteClick = () => {
-        if (onFavoriteClick) {
-            onFavoriteClick(subBreedWithImages.subBreed);
-        }
-    };
 
     return (
         <li className="mr-6 my-6 relative" key={subBreedWithImages?.subBreed}>
@@ -36,8 +31,9 @@ function SubBreedDetails({
                 type="button"
                 onClick={handleFavoriteClick}
                 className="absolute right-3 bottom-3"
+                style={{ color: isFavorite() ? 'red' : 'white' }}
             >
-                <MdFavorite color="#fff" size={34} />
+                <MdFavorite size={34} />
             </button>
         </li>
     );

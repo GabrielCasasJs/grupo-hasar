@@ -4,7 +4,6 @@ import {
 } from 'react-router-dom';
 
 import { MdFavorite } from "react-icons/md";
-
 import { FcHome } from "react-icons/fc";
 
 import useGetDogDetails from '../../hooks/UseGetDogDetails';
@@ -22,7 +21,7 @@ function BreedsDetails() {
   const { breed } = useParams();
 
   const {
-    favorites,
+    isFavorite,
     addToFavorites,
     removeFromFavorites,
   } = useFavorites();
@@ -84,11 +83,12 @@ function BreedsDetails() {
             <SubBreedDetails
               key={subBreedWithImages.subBreed}
               subBreedWithImages={subBreedWithImages}
-              onFavoriteClick={(subBreed) => {
-                if (favorites.includes(subBreed)) {
-                  removeFromFavorites(subBreed);
+              isFavorite={() => isFavorite(subBreedWithImages)}
+              handleFavoriteClick={() => {
+                if (isFavorite(subBreedWithImages)) {
+                  removeFromFavorites(subBreedWithImages);
                 } else {
-                  addToFavorites(subBreed);
+                  addToFavorites(subBreedWithImages);
                 }
               }}
             />
