@@ -60,10 +60,12 @@ function BreedsDetails() {
         {details[0].subBreed === breed ? 'NO HAY SUB RAZAS' : 'SUB RAZAS!'}
       </Text>
 
+      {console.info('breed :', breed)}
       {details.length > 0 && (
         <ul className="flex w-full flex-wrap mt-4">
           {details.map((subBreedWithImages) => (
             <SubBreedDetails
+              isFavoriteActive={!(details[0].subBreed === breed)}
               key={subBreedWithImages.subBreed}
               subBreedWithImages={subBreedWithImages}
               isFavorite={() => isFavorite(subBreedWithImages)}
