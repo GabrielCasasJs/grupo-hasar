@@ -31,7 +31,11 @@ function SubBreedDetails({
                 type="button"
                 onClick={handleFavoriteClick}
                 className="absolute right-3 bottom-3"
-                style={{ color: isFavorite() ? 'red' : 'white' }}
+                style={{
+                    border: '1px solid',
+                    borderRadius: 8,
+                    color: isFavorite() ? 'red' : 'white',
+                }}
             >
                 <MdFavorite size={34} />
             </button>

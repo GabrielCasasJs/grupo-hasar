@@ -54,7 +54,11 @@ function FavoriteBreends() {
                 type="button"
                 onClick={() => handleFavoriteClick(item)}
                 className="absolute bottom-16 right-12"
-                style={{ color: 'red' }}
+                style={{
+                  color: 'red',
+                  border: '1px solid',
+                  borderRadius: 8,
+                }}
               >
                 <MdFavorite size={28} />
               </button>
