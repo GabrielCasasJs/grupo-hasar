@@ -36,15 +36,17 @@ async function getBreedImages(breed) {
     }
 }
 
-async function getSubBreedImages(breed, subBreed, count = 1) {
+async function getSubBreedImages(breed, subBreed = '') {
+    const url = subBreed
+        ? `https://dog.ceo/api/breed/${breed}/${subBreed}/images/random/1`
+        : `https://dog.ceo/api/breed/${breed}/images/random/1`;
+
     try {
-        const response = await axiosInstance.get(`/breed/${breed}/${subBreed}/images/random/${count}`);
-        if (response) {
-            return response.data;
-        }
-    } catch (err) {
-        console.info(`Err getSubBreedImages for ${subBreed} of ${breed}:`, err);
-        throw err;
+        const response = await axiosInstance.get(url);
+        return response.data;
+    } catch (error) {
+        console.error(`Err getSubBreedImages for ${subBreed} of ${breed}:`, error);
+        throw error;
     }
 }
 

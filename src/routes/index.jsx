@@ -29,7 +29,7 @@ function RoutesIndex() {
       element: <BreendsDetails />
     },
     {
-      path: "/favorite-breends",
+      path: "/favorite-breeds",
       element: <FavoriteBreends />
     },
     {

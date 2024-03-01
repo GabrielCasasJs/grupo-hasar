@@ -17,14 +17,9 @@ import SubBreedDetails from './components/SubBreedDetails';
 
 function BreedsDetails() {
   const navigate = useNavigate();
-
   const { breed } = useParams();
 
-  const {
-    isFavorite,
-    addToFavorites,
-    removeFromFavorites,
-  } = useFavorites();
+  const { isFavorite, addToFavorites, removeFromFavorites } = useFavorites();
 
   const { details, loading, error } = useGetDogDetails(breed);
 
@@ -42,17 +37,12 @@ function BreedsDetails() {
         <button type="button" onClick={() => navigate('/home')}>
           <FcHome size={40} />
         </button>
-
         <button
           type="button"
-          onClick={() => navigate('/favorite-breends')}
+          onClick={() => navigate('/favorite-breeds')}
           className="flex items-center border rounded-lg p-2"
         >
-          <p
-            className="pr-4 text-gray-100"
-          >
-            Favoritos
-          </p>
+          <p className="pr-4 text-gray-100">Favoritos</p>
           <MdFavorite color="#fff" size={34} />
         </button>
       </div>
@@ -65,21 +55,14 @@ function BreedsDetails() {
       >
         {`Detalle de la Raza - ${capitalizeFirstLetter(breed)}`}
       </Text>
-
       <hr style={{ marginTop: 40 }} />
-
-      <Text
-        color="white"
-        weight="bold"
-        customSize={30}
-        styles={{ marginTop: 40 }}
-      >
-        {details.length > 0 ? 'SUB RAZAS' : 'NO HAY SUB RAZAS!'}
+      <Text color="white" weight="bold" customSize={30} styles={{ marginTop: 40 }}>
+        {details[0].subBreed === breed ? 'NO HAY SUB RAZAS' : 'SUB RAZAS!'}
       </Text>
 
-      {details.length > 0 ? (
+      {details.length > 0 && (
         <ul className="flex w-full flex-wrap mt-4">
-          {details && details?.length > 0 && details?.map((subBreedWithImages) => (
+          {details.map((subBreedWithImages) => (
             <SubBreedDetails
               key={subBreedWithImages.subBreed}
               subBreedWithImages={subBreedWithImages}
@@ -94,8 +77,6 @@ function BreedsDetails() {
             />
           ))}
         </ul>
-      ) : (
-        <Text> Sin sub raza </Text>
       )}
     </Screen>
   );

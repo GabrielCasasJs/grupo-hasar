@@ -31,7 +31,7 @@ function Home() {
         </h2>
         <button
           type="button"
-          onClick={() => navigate('/favorite-breends')}
+          onClick={() => navigate('/favorite-breeds')}
           className="flex items-center border rounded-lg p-2"
         >
           <p
