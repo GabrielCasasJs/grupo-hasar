@@ -13,7 +13,7 @@ const NotFound = () => {
       <Text size="p" color="default">
         La página que estás buscando no existe.
       </Text>
-      <Link to="/">
+      <Link to="/home">
         <Text size="p" color="secondary-greenStrong" underline>
           Volver a la página de inicio
         </Text>
